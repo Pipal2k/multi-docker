@@ -14,7 +14,7 @@ after_success:
   - docker build -t pipal/multi-server ./server
   - docker build -t pipal/multi-worker ./worker
   # Take and push to docker hub
-  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password=stdin
+  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
   - docker push pipal/multi-client
   - docker push pipal/multi-nginx
   - docker push pipal/multi-server
