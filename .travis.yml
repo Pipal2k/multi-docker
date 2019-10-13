@@ -1,0 +1,20 @@
+sudo: required
+services:
+  - docker
+
+before_install:
+  - docker build -t pipal/react-test -f ./client/Dockerfile.dev ./client
+
+script:
+  - docker run -e CI=true pipal/react-test npm test
+
+after_success:
+  - docker build -t pipal/multi-client ./client
+  - docker build -t pipal/multi-nginx ./nginx
+  - docker build -t pipal/multi-server ./server
+  - docker build -t pipal/multi-worker ./worker
+  # Take and push to docker hub
+  - docker push pipal/multi-client
+  - docker push pipal/multi-nginx
+  - docker push pipal/multi-server
+  - docker push pipal/multi-worker
