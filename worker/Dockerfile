@@ -7,4 +7,4 @@ RUN npm install
 
 Copy . .
 
-CMD ["npm","run","build"]
+CMD ["npm","run","start"]
